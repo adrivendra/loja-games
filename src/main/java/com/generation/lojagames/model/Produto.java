@@ -1,5 +1,6 @@
 package com.generation.lojagames.model;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 
 import org.hibernate.annotations.UpdateTimestamp;
@@ -13,6 +14,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "tb_produtos")
@@ -25,6 +27,9 @@ public class Produto {
 	@NotBlank(message = "O atributo nomeProduto é Obrigatório!")
 	private String nomeProduto;
 
+	@NotNull(message = "O atributo valor é Obrigatório!")
+	private BigDecimal valor;
+
 	@UpdateTimestamp
 	private LocalDateTime dataCadastro;
 
@@ -33,6 +38,14 @@ public class Produto {
 	@ManyToOne
 	@JsonIgnoreProperties("produto")
 	private Categoria categoria;
+
+	public BigDecimal getValor() {
+		return valor;
+	}
+
+	public void setValor(BigDecimal valor) {
+		this.valor = valor;
+	}
 
 	public Categoria getCategoria() {
 		return categoria;
